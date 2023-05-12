@@ -1,0 +1,7 @@
+#!/bin/bash
+
+KEY="~/.ssh/id_ed25519"
+PORT="22"
+USER="www-data"
+HOST="example.fritz.box"
+DEST="/var/www/acme-challenge"
