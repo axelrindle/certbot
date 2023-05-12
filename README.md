@@ -26,8 +26,22 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+4. Define common variables
+
+```shell
+cp hooks/common.sh.example hooks/common.sh
+```
+
+The variables are required for copying the auth token via SSH to the webroot.
+
 Activate the virtual environment whenever you want to work
 with your certificates.
+
+5. (optional) create a deployment script
+
+If you want to copy your certificates to another (local or remote) location
+afterwards, create a file named `deploy.sh` and fill it with logic. It will
+be called after a successful renewal.
 
 ## Requesting a certificate
  
