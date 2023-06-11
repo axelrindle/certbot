@@ -4,6 +4,11 @@ This is the certbot configuration I'm using.
 
 It relies on the manual plugin.
 
+## Supported challenges
+
+- HTTP-01
+- Manual DNS via [lima-city](https://www.lima-city.de/)
+
 ## Setup
 
 ### 1. Clone this repository
@@ -26,10 +31,23 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Define common variables
+### 4. Choose a challenge
+
+Available challenges are:
+
+- http
+- dns
+
+Configure the challenge via a `.env` file:
+
+```
+CHALLENGE=http
+```
+
+### 5. Define common variables
 
 ```shell
-cp hooks/common.sh.example hooks/common.sh
+cp hooks/$CHALLENGE/common.sh.example hooks/$CHALLENGE/common.sh
 ```
 
 The variables are required for copying the auth token via SSH to the webroot.
@@ -37,7 +55,7 @@ The variables are required for copying the auth token via SSH to the webroot.
 Activate the virtual environment whenever you want to work
 with your certificates.
 
-### 5. (optional) create a deployment script
+### 6. (optional) create a deployment script
 
 If you want to copy your certificates to another (local or remote) location
 afterwards, create a file named `deploy.sh` and fill it with logic. It will
@@ -57,3 +75,7 @@ certbot certonly \
 ## Automatic renewal
 
 The `certbot.sh` script can be used in cron for automatic renewal.
+
+## TODO
+
+- Certificate requesting
