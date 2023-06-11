@@ -1,0 +1,6 @@
+#!/bin/bash
+
+LIMA_URL="https://www.lima-city.de/usercp"
+LIMA_USER="api"
+LIMA_TOKEN=""
+LIMA_DOMAIN_ID=""

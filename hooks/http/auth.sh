@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./hooks/common.sh
+source ./hooks/http/common.sh
 
 echo $CERTBOT_VALIDATION > ./$CERTBOT_TOKEN
 

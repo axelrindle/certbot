@@ -2,13 +2,15 @@
 
 set -ex
 
+source ".env"
+
 # renew certificates
 $HOME/certbot/venv/bin/certbot renew \
     --manual \
-    --preferred-challenges http \
+    --preferred-challenges "$CHALLENGE" \
     --non-interactive \
-    --manual-auth-hook ./hooks/auth.sh \
-    --manual-cleanup-hook ./hooks/cleanup.sh
+    --manual-auth-hook "./hooks/$CHALLENGE/auth.sh" \
+    --manual-cleanup-hook "./hooks/$CHALLENGE/cleanup.sh"
 
 # deploy for download
 if [ -f "deploy.sh" ]; then
