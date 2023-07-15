@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck source=/dev/null
 source ./hooks/dns/common.sh
 
 RESPONSE=$(curl --silent \
@@ -8,4 +9,4 @@ RESPONSE=$(curl --silent \
     --user "$LIMA_USER:$LIMA_TOKEN"
 )
 
-echo $RESPONSE | jq .status
+echo "$RESPONSE" | jq .status

@@ -9,9 +9,9 @@ readarray -t CERTIFICATES < <(certbot certificates | grep "Certificate Name" | c
 for cert in "${CERTIFICATES[@]}"; do
     echo "Renew $cert"
     CONFIG="/volume1/homes/axelrindle/opt/letsencrypt/config/renewal/$cert.conf"
-    CHALLENGE=$(cat "$CONFIG" | grep pref_challs | cut -d\  -f3 | sed 's/-01,//g')
+    CHALLENGE=$(grep pref_challs "$CONFIG" | cut -d\  -f3 | sed 's/-01,//g')
 
-    $HOME/certbot/venv/bin/certbot certonly \
+    "$HOME/certbot/venv/bin/certbot" certonly \
         --manual \
         --non-interactive \
         --preferred-challenges "$CHALLENGE" \

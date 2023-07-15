@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck source=/dev/null
 source ./hooks/dns/common.sh
 
 RESPONSE=$(curl --silent \
@@ -17,4 +18,4 @@ RESPONSE=$(curl --silent \
   }
 }")
 
-echo $RESPONSE | jq .object.id
+echo "$RESPONSE" | jq .object.id
