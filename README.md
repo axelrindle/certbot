@@ -31,20 +31,12 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Choose a challenge
+### 4. Define common variables
 
-Available challenges are:
+Configure all challenges you requested certificates with.
 
-- http
-- dns
-
-Configure the challenge via a `.env` file:
-
-```
-CHALLENGE=http
-```
-
-### 5. Define common variables
+E.g if all of your certificates were requesting using the DNS-01 challenge,
+you may only configure the DNS challenge.
 
 ```shell
 cp hooks/$CHALLENGE/common.sh.example hooks/$CHALLENGE/common.sh
@@ -55,7 +47,7 @@ The variables are required for copying the auth token via SSH to the webroot.
 Activate the virtual environment whenever you want to work
 with your certificates.
 
-### 6. (optional) create a deployment script
+### 5. (optional) create a deployment script
 
 If you want to copy your certificates to another (local or remote) location
 afterwards, create a file named `deploy.sh` and fill it with logic. It will
