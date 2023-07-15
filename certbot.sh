@@ -1,16 +1,24 @@
 #!/bin/bash
 
-set -ex
+set -e
 
-source ".env"
+#source ".env"
 
-# renew certificates
-$HOME/certbot/venv/bin/certbot renew \
-    --manual \
-    --preferred-challenges "$CHALLENGE" \
-    --non-interactive \
-    --manual-auth-hook "./hooks/$CHALLENGE/auth.sh" \
-    --manual-cleanup-hook "./hooks/$CHALLENGE/cleanup.sh"
+readarray -t CERTIFICATES < <(certbot certificates | grep "Certificate Name" | cut -d: -f2 2>/dev/null | awk '{$1=$1};1')
+
+for cert in "${CERTIFICATES[@]}"; do
+    echo "Renew $cert"
+    CONFIG="/volume1/homes/axelrindle/opt/letsencrypt/config/renewal/$cert.conf"
+    CHALLENGE=$(cat "$CONFIG" | grep pref_challs | cut -d\  -f3 | sed 's/-01,//g')
+
+    $HOME/certbot/venv/bin/certbot certonly \
+        --manual \
+        --non-interactive \
+        --preferred-challenges "$CHALLENGE" \
+        --manual-auth-hook "./hooks/$CHALLENGE/auth.sh" \
+        --manual-cleanup-hook "./hooks/$CHALLENGE/cleanup.sh" \
+        --cert-name "$cert"
+done
 
 # deploy for download
 if [ -f "deploy.sh" ]; then
