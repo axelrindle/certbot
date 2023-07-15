@@ -1,3 +1,5 @@
+[![CI](https://github.com/axelrindle/certbot/actions/workflows/ci.yml/badge.svg)](https://github.com/axelrindle/certbot/actions/workflows/ci.yml)
+
 # certbot
 
 This is the certbot configuration I'm using.
